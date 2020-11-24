@@ -26,7 +26,7 @@ jobs:
         
       - name: Build
         env:
-          PUBLIC_HTML: https://renato-bohler.github.io/what-the-filter
+          PUBLIC_URL: https://renato-bohler.github.io/what-the-filter
         run: yarn build
 
       - name: Deploy
