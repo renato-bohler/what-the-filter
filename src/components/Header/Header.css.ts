@@ -38,11 +38,15 @@ export const TwitterButton = styled.a`
   align-items: center;
   justify-content: center;
 
-  background-color: #dddddd;
-  background-image: linear-gradient(180deg, #eeeeee 0, #dddddd);
+  background-color: #eeeeee;
+  background-image: linear-gradient(
+    to bottom,
+    #fcfcfc 0,
+    #eeeeee 100%
+  );
   background-repeat: no-repeat;
 
-  border: 1px solid #cccccc;
+  border: 1px solid #d5d5d5;
   border-radius: 6px;
 
   font-family: Sriracha;
@@ -54,6 +58,24 @@ export const TwitterButton = styled.a`
   padding: 4px 20px 4px 16px;
 
   cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #dddddd;
+    background-image: linear-gradient(
+      to bottom,
+      #eee 0,
+      #dddddd 100%
+    );
+    border-color: #cccccc;
+  }
+
+  &:active {
+    background-image: none;
+    background-color: #dcdcdc;
+    border-color: #b5b5b5;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 export const TwitterIcon = styled(Twitter)`
