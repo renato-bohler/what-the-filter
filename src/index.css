@@ -19,7 +19,7 @@ body {
 .github-btn {
   display: flex;
   justify-content: center;
-  margin: 8px 0;
+  margin: 4px;
 }
 
 .gh-btn,
