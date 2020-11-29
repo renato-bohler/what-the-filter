@@ -88,7 +88,16 @@ export type Method =
   | 'find'
   | 'findIndex'
   | 'every'
-  | 'some';
+  | 'some'
+  | 'sort'
+  | 'reverse'
+  | 'splice'
+  | 'copyWithin'
+  | 'fill'
+  | 'pop'
+  | 'shift'
+  | 'push'
+  | 'unshift';
 
 export const isIdentifier = (node: Node): node is Identifier =>
   node.type === 'Identifier';
