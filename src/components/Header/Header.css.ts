@@ -20,7 +20,7 @@ export const Title = styled.h1`
 `;
 
 export const Logo = styled.img`
-  max-width: 500px;
+  max-width: 450px;
   width: 100%;
   height: auto;
 `;
