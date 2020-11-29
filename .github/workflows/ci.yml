@@ -25,12 +25,12 @@ jobs:
         run: yarn test
         
       - name: Build
+        env:
+          PUBLIC_URL: https://renato-bohler.github.io/what-the-filter
         run: yarn build
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          BRANCH: gh-pages
-          FOLDER: build
-          CLEAN: true
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./build
