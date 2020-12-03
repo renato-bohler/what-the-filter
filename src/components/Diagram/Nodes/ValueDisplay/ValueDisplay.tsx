@@ -27,8 +27,10 @@ const ValueType: React.VFC<Props> = ({ value, collapsed }) => {
       <ReactJSON
         src={value}
         displayDataTypes={false}
+        enableClipboard={false}
         name={null}
         collapsed={collapsed}
+        groupArraysAfterLength={10}
       />
     );
   if (typeof value === 'string')

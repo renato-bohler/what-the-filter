@@ -33,7 +33,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-github-button": "^0.1.11",
-    "react-json-view": "^1.19.1",
+    "react-json-view": "alexanderphan/react-json-view",
     "react-scripts": "4.0.0",
     "react-select": "^3.1.0",
     "react-split-pane": "^0.1.92",
