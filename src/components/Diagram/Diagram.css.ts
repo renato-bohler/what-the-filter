@@ -8,7 +8,7 @@ type ContainerProps = {
 
 export const Container = styled.section<ContainerProps>`
   position: relative;
-  z-index: 2;
+  z-index: 5;
 
   height: 100vh;
   background-color: #010710;

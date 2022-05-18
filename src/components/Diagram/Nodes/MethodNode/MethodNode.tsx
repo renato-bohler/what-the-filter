@@ -109,7 +109,7 @@ export const MethodNode: React.VFC<Props> = ({
             <>
               <ExtraButton
                 $color="#d01a83"
-                tooltip="Step by step"
+                $tooltip="Step by step"
                 onClick={() => setStepByStepVisible(true)}
               >
                 <Steps width={20} height={20} />
@@ -128,7 +128,7 @@ export const MethodNode: React.VFC<Props> = ({
             <>
               <ExtraButton
                 $color="#ffb217"
-                tooltip="Warnings"
+                $tooltip="Warnings"
                 onClick={() => setWarningsVisible(true)}
               >
                 <Warning width={20} height={20} />

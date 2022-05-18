@@ -15,6 +15,7 @@ import { Container, SplitPane } from './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 const DEFAULT_PANE_SIZE = () => Math.max(400, window.innerWidth / 2);
+const MAX_EDITOR_WIDTH = 1200;
 
 const generateNodesFromSource = (source: Result): DiagramNode[] => [
   {
@@ -117,7 +118,10 @@ export const App: React.VFC = () => {
     return (
       <Container>
         <Header />
-        <Code onSubmit={handleCodeSubmit} width={width - 50} />
+        <Code
+          onSubmit={handleCodeSubmit}
+          width={Math.min(MAX_EDITOR_WIDTH, width - 50)}
+        />
         <Diagram
           isOpen={isDiagramOpen}
           onClose={handleCloseDiagram}
@@ -144,7 +148,7 @@ export const App: React.VFC = () => {
         <Header />
         <Code
           onSubmit={handleCodeSubmit}
-          width={width - paneSize - 50}
+          width={Math.min(MAX_EDITOR_WIDTH, width - paneSize - 50)}
           submitOnMount
         />
         <Footer />
