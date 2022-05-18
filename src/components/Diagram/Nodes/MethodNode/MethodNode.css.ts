@@ -11,7 +11,7 @@ type CollapsableContentProps = {
 
 type ExtraButtonProps = {
   $color: string;
-  tooltip: string;
+  $tooltip: string;
 };
 
 export const Container = styled.div`
@@ -133,7 +133,7 @@ export const ExtraButton = styled.button<ExtraButtonProps>`
   cursor: pointer;
 
   &:hover:after {
-    content: ${({ tooltip }) => `'${tooltip}'`};
+    content: ${({ $tooltip }) => `'${$tooltip}'`};
     position: absolute;
     right: 0;
     transform: translateX(calc(100% + 8px));

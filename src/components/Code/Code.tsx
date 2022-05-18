@@ -1,7 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { ValueType } from 'react-select';
 
 import useHotkeys from '@reecelucas/react-use-hotkeys';
+
+import { ReactComponent as FullscreenEnter } from 'src/assets/fullscreen-enter.svg';
+import { ReactComponent as FullscreenExit } from 'src/assets/fullscreen-exit.svg';
 
 import {
   Container,
@@ -10,6 +13,8 @@ import {
   Editor,
   Loading,
   Button,
+  EditorWrapper,
+  IconButton,
 } from './Code.css';
 import { EXAMPLES, Example } from './examples.const';
 
@@ -26,6 +31,8 @@ export const Code: React.VFC<CodeProps> = ({
   width,
   submitOnMount,
 }) => {
+  const [height, setHeight] = useState<number | undefined>(undefined);
+  const [fullscreen, setFullscreen] = useState(false);
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [selectedExample, setSelectedExample] = useState<Example>(
     EXAMPLES[0].options[0],
@@ -36,6 +43,15 @@ export const Code: React.VFC<CodeProps> = ({
     handleSubmit();
   };
   useHotkeys(['Control+s', 'Shift+Enter'], handleHotKey);
+
+  const handleToggleFullscreen = () => setFullscreen((f) => !f);
+
+  // We need this so that Monaco can recalculate its height
+  useEffect(() => {
+    if (fullscreen) return;
+    setHeight(0);
+    setTimeout(() => setHeight(undefined), 100);
+  }, [fullscreen]);
 
   const handleExampleChange = (selected: ValueType<Example>) => {
     if (!selected) return;
@@ -68,28 +84,38 @@ export const Code: React.VFC<CodeProps> = ({
       />
 
       <Description>... and edit as you will</Description>
-      <Editor
-        theme="vs-dark"
-        language="javascript"
-        options={{
-          minimap: {
-            enabled: false,
-          },
-        }}
-        editorDidMount={handleEditorDidMount}
-        value={selectedExample.value}
-        loading={
-          <Loading width={width}>Loading code editor...</Loading>
-        }
-        width={width}
-      />
+
+      <EditorWrapper $fullscreen={fullscreen} $width={width}>
+        <IconButton
+          onClick={handleToggleFullscreen}
+          title={fullscreen ? 'Contract editor' : 'Expand editor'}
+        >
+          {fullscreen ? <FullscreenExit /> : <FullscreenEnter />}
+        </IconButton>
+
+        <Editor
+          theme="vs-dark"
+          language="javascript"
+          options={{
+            minimap: {
+              enabled: false,
+            },
+          }}
+          editorDidMount={handleEditorDidMount}
+          value={selectedExample.value}
+          loading={<Loading>Loading code editor...</Loading>}
+          width={width}
+          height={height}
+          $fullscreen={fullscreen}
+        />
+      </EditorWrapper>
 
       <Button
         type="button"
         onClick={handleSubmit}
         disabled={!isEditorReady}
       >
-        Submit
+        Execute
       </Button>
       <Description>
         (you can also CTRL + S or SHIFT + ENTER)
