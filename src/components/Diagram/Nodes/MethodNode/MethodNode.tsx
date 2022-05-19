@@ -62,7 +62,7 @@ const getFormattedCode = (step: Step) =>
     )
     .substring(1)}`;
 
-export const MethodNode: React.VFC<Props> = ({
+export const MethodNode: React.FC<Props> = ({
   step,
   open,
   toggleOpen,
@@ -82,7 +82,7 @@ export const MethodNode: React.VFC<Props> = ({
             <SectionTitle>Code:</SectionTitle>
             <Code>{code}</Code>
 
-            {documentation && (
+            {documentation?.url && (
               <>
                 <br />
                 <SectionTitle>

@@ -63,12 +63,14 @@ export const getErrorHint = (
   ) {
     return {
       message: `You are trying to call \`${lastMethod}\` on \`${lastInputText}\`, but \`${lastInputType}.${lastMethod}\` function does not exist.`,
-      examples: [
-        {
-          bad: `(${lastInputText}).${lastMethod}(${ARGUMENT_EXAMPLES[lastMethod]})`,
-          good: `([1, 2, 3]).${lastMethod}(${ARGUMENT_EXAMPLES[lastMethod]})`,
-        },
-      ],
+      examples: ARGUMENT_EXAMPLES[lastMethod]
+        ? [
+            {
+              bad: `(${lastInputText}).${lastMethod}(${ARGUMENT_EXAMPLES[lastMethod]})`,
+              good: `([1, 2, 3]).${lastMethod}(${ARGUMENT_EXAMPLES[lastMethod]})`,
+            },
+          ]
+        : [],
     };
   }
 

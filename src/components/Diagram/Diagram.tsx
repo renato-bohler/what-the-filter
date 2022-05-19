@@ -36,7 +36,7 @@ type Position = {
   y: number;
 };
 
-export const Diagram: React.VFC<DiagramProps> = ({
+export const Diagram: React.FC<DiagramProps> = ({
   isOpen,
   onClose,
   nodes,

@@ -8,7 +8,7 @@ type WarningsModalProps = {
   warnings: string[];
 };
 
-export const WarningsModal: React.VFC<WarningsModalProps> = ({
+export const WarningsModal: React.FC<WarningsModalProps> = ({
   visible,
   onClose,
   warnings,

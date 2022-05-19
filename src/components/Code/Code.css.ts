@@ -79,7 +79,7 @@ export const Select = styled(BaseSelect)`
     color: white;
     background: #f2333320;
   }
-`;
+` as typeof BaseSelect;
 
 export const EditorWrapper = styled.div<EditorProps>`
   position: ${({ $fullscreen }) =>

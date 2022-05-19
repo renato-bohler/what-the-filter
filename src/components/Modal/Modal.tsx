@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { PropsWithChildren, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import { ReactComponent as Close } from 'src/assets/close.svg';
@@ -19,7 +19,7 @@ type ModalProps = {
   onClose: () => void;
 };
 
-export const Modal: React.FC<ModalProps> = ({
+export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
   children,
   title,
   visible,

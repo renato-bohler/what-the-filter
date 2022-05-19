@@ -11,7 +11,7 @@ type Props = {
   toggleOpen?: () => void;
 };
 
-export const Arrow: React.VFC<Props> = ({
+export const Arrow: React.FC<Props> = ({
   value,
   open = false,
   toggleOpen = () => {},

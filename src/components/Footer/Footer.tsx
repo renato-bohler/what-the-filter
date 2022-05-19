@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container } from './Footer.css';
 
-export const Footer: React.VFC = () => (
+export const Footer: React.FC = () => (
   <Container>
     <span>
       Designed and developed with <em>♥</em>

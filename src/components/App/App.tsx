@@ -53,7 +53,7 @@ const generateNodesFromSource = (source: Result): DiagramNode[] => [
   },
 ];
 
-export const App: React.VFC = () => {
+export const App: React.FC = () => {
   const [isDiagramOpen, setDiagramOpen] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [paneSize, setPaneSize] = useState(DEFAULT_PANE_SIZE);
@@ -85,7 +85,7 @@ export const App: React.VFC = () => {
         setDiagramOpen(true);
         if (paneSize === 0) setPaneSize(DEFAULT_PANE_SIZE);
       } catch (error) {
-        toast(error.message, {
+        toast((error as Error).message, {
           type: 'error',
           position: 'bottom-left',
         });

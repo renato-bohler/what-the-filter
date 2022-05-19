@@ -37,14 +37,14 @@ type ErrorContentProps = {
   error: ResultError;
 };
 
-const Icon: React.VFC<IconProps> = ({ $size, $type }) => {
+const Icon: React.FC<IconProps> = ({ $size, $type }) => {
   if ($type === 'dot') return <Circle width={$size} height={$size} />;
   if ($type === 'error')
     return <Close width={$size} height={$size} />;
   return <Check width={$size} height={$size} />;
 };
 
-const ErrorContent: React.VFC<ErrorContentProps> = ({ error }) => (
+const ErrorContent: React.FC<ErrorContentProps> = ({ error }) => (
   <ErrorContainer>
     <h1>Error</h1>
     <h2>Message</h2>
@@ -85,7 +85,7 @@ const ErrorContent: React.VFC<ErrorContentProps> = ({ error }) => (
   </ErrorContainer>
 );
 
-export const ValueNode: React.VFC<Props> = ({
+export const ValueNode: React.FC<Props> = ({
   value,
   open,
   toggleOpen,

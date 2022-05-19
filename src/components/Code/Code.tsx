@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ValueType } from 'react-select';
+import { SingleValue } from 'react-select';
 
 import useHotkeys from '@reecelucas/react-use-hotkeys';
 
@@ -26,7 +26,7 @@ type CodeProps = {
 
 type ValueGetter = () => string;
 
-export const Code: React.VFC<CodeProps> = ({
+export const Code: React.FC<CodeProps> = ({
   onSubmit,
   width,
   submitOnMount,
@@ -53,7 +53,7 @@ export const Code: React.VFC<CodeProps> = ({
     setTimeout(() => setHeight(undefined), 100);
   }, [fullscreen]);
 
-  const handleExampleChange = (selected: ValueType<Example>) => {
+  const handleExampleChange = (selected: SingleValue<Example>) => {
     if (!selected) return;
     const option = selected as Example;
     setSelectedExample(option);
@@ -76,7 +76,7 @@ export const Code: React.VFC<CodeProps> = ({
   return (
     <Container>
       <Description>Select an example below...</Description>
-      <Select
+      <Select<Example, false>
         value={selectedExample}
         onChange={handleExampleChange}
         options={EXAMPLES}

@@ -82,8 +82,8 @@ export const execute = (source: string): Result => {
       steps,
       success: false,
       error: {
-        message: error.message,
-        hint: getErrorHint(error, steps[steps.length - 1]),
+        message: (error as Error).message,
+        hint: getErrorHint(error as Error, steps[steps.length - 1]),
       },
     };
   }

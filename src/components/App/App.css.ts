@@ -10,7 +10,8 @@ export const Container = styled.div`
   user-select: none;
 `;
 
-export const SplitPane = styled(BaseSplitPane)`
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const SplitPane = styled(BaseSplitPane as any)`
   .Resizer {
     background: white;
     background-clip: padding-box;

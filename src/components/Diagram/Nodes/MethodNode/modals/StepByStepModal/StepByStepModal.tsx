@@ -39,7 +39,7 @@ const isFilterMap = (
 ): step is FilterMapExecutionSteps[] =>
   (step as FilterMapExecutionSteps[])[0].input !== undefined;
 
-const StepTable: React.VFC<StepTableProps> = ({
+const StepTable: React.FC<StepTableProps> = ({
   executionSteps,
   showAllColumns,
 }) => {
@@ -132,7 +132,7 @@ const StepTable: React.VFC<StepTableProps> = ({
   return null;
 };
 
-export const StepByStepModal: React.VFC<StepByStepModalProps> = ({
+export const StepByStepModal: React.FC<StepByStepModalProps> = ({
   visible,
   onClose,
   executionSteps,

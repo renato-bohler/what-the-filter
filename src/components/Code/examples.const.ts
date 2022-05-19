@@ -1,13 +1,11 @@
-import { OptionTypeBase, GroupType } from 'react-select';
+import { GroupBase } from 'react-select';
 
 import { MAIN_FUNCTION_NAME } from 'src/execute/utils/const';
 
-export interface Example extends OptionTypeBase {
+export interface Example {
   value: string;
   label: string;
 }
-
-export type ExampleGroup = GroupType<Example>;
 
 const wrap = (label: string, source: string[]): Example => ({
   label,
@@ -19,7 +17,7 @@ const wrap = (label: string, source: string[]): Example => ({
   ].join('\n'),
 });
 
-export const EXAMPLES: ExampleGroup[] = [
+export const EXAMPLES: GroupBase<Example>[] = [
   {
     label: 'Basic examples',
     options: [

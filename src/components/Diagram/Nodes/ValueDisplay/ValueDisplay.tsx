@@ -18,7 +18,7 @@ type Props = {
   collapsed?: boolean;
 };
 
-const ValueType: React.VFC<Props> = ({ value, collapsed }) => {
+const ValueType: React.FC<Props> = ({ value, collapsed }) => {
   if (value === null) return <NullValue>NULL</NullValue>;
   if (value === undefined)
     return <UndefinedValue>undefined</UndefinedValue>;
@@ -44,7 +44,7 @@ const ValueType: React.VFC<Props> = ({ value, collapsed }) => {
   return <GenericValue>{JSON.stringify(value)}</GenericValue>;
 };
 
-export const ValueDisplay: React.VFC<Props> = ({
+export const ValueDisplay: React.FC<Props> = ({
   value,
   collapsed,
 }) => (

@@ -12,7 +12,7 @@ import {
   TwitterIcon,
 } from './Header.css';
 
-export const Header: React.VFC = () => (
+export const Header: React.FC = () => (
   <Container>
     <Logo src={logo} alt="what the filter? logo" />
     <Title>

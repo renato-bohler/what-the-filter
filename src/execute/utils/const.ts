@@ -1,9 +1,11 @@
+import { Method } from './types';
+
 export const MAIN_FUNCTION_NAME = 'whatTheFilter';
 
 export const EXECUTION_STEP_VARIABLE_NAME = 'executionStep';
 export const EXECUTION_STEPS_VARIABLE_NAME = 'executionSteps';
 
-export const ARGUMENT_EXAMPLES = {
+export const ARGUMENT_EXAMPLES: Record<Method, string> = {
   'Object.entries': '{a: 1, b: 2, c: 3}',
   'Object.fromEntries': "[['a', 1], ['b', 2], ['c', 3]]",
   'Object.values': '{a: 1, b: 2, c: 3}',
@@ -16,6 +18,15 @@ export const ARGUMENT_EXAMPLES = {
   findIndex: 'a => a === 1',
   every: 'a => a > 0',
   some: 'a => a > 0',
+  sort: '',
+  reverse: '',
+  splice: '',
+  copyWithin: '',
+  fill: '',
+  pop: '',
+  shift: '',
+  push: '',
+  unshift: '',
 };
 
 export const MUTATING_METHODS = [

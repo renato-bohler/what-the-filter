@@ -1,16 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
 import { App } from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 
-ReactDOM.render(
-  <React.StrictMode>
+const container = document.getElementById('root');
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!);
+
+root.render(
+  <StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
+  </StrictMode>,
 );
 
 serviceWorker.register();

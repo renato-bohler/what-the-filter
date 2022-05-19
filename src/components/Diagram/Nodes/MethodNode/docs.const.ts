@@ -16,15 +16,15 @@ export const MDN_DOCS: Record<Method, DocEntry> = {
     description:
       'The Object.fromEntries() method transforms a list of key-value pairs into an object.',
   },
-  'Object.keys': {
-    url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries',
-    description:
-      "The Object.keys() method returns an array of a given object's own enumerable property names.",
-  },
   'Object.values': {
     url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values',
     description:
       "The Object.values() method returns an array of a given object's own enumerable property values",
+  },
+  'Object.keys': {
+    url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries',
+    description:
+      "The Object.keys() method returns an array of a given object's own enumerable property names.",
   },
   filter: {
     url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter',
@@ -66,4 +66,13 @@ export const MDN_DOCS: Record<Method, DocEntry> = {
     description:
       'The some() method tests whether at least one element in the array passes the test implemented by the provided function. It returns a Boolean value.',
   },
+  sort: { url: '', description: '' },
+  reverse: { url: '', description: '' },
+  splice: { url: '', description: '' },
+  copyWithin: { url: '', description: '' },
+  fill: { url: '', description: '' },
+  pop: { url: '', description: '' },
+  shift: { url: '', description: '' },
+  push: { url: '', description: '' },
+  unshift: { url: '', description: '' },
 };

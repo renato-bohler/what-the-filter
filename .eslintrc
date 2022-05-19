@@ -15,11 +15,11 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
     "plugin:react-hooks/recommended",
+    "plugin:react/jsx-runtime",
     "plugin:jest/recommended",
     "plugin:jest-dom/recommended",
-    "plugin:testing-library/recommended",
+    "plugin:testing-library/react",
     "plugin:prettier/recommended"
   ],
   "plugins": [
@@ -40,7 +40,7 @@
         "groups": [
           "/^react/",
           "module",
-          "/^src\/.*/",
+          "/^src/.*/",
           "/^./modules/",
           ["index", "parent", "sibling"]
         ],
