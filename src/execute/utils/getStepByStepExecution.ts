@@ -35,9 +35,11 @@ const getTransformedCallback = (
    */
   if (isIdentifier(currentNode.arguments[0])) {
     const identifier = currentNode.arguments[0].name;
-    currentNode.arguments[0] = (getFirstNodeFromSource(
-      `(...args) => ${identifier}(...args)`,
-    ) as ExpressionStatement).expression;
+    currentNode.arguments[0] = (
+      getFirstNodeFromSource(
+        `(...args) => ${identifier}(...args)`,
+      ) as ExpressionStatement
+    ).expression;
   }
 
   const callback = currentNode.arguments[0];
