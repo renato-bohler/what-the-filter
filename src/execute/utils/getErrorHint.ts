@@ -75,7 +75,7 @@ export const getErrorHint = (
   }
 
   if (
-    new RegExp(`Cannot read property '${lastMethod}'`).test(
+    new RegExp(`Cannot read propert(y|ies) .* '${lastMethod}'`).test(
       error.message,
     )
   ) {

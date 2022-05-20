@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SingleValue } from 'react-select';
 
 import useHotkeys from '@reecelucas/react-use-hotkeys';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 import { ReactComponent as FullscreenEnter } from 'src/assets/fullscreen-enter.svg';
 import { ReactComponent as FullscreenExit } from 'src/assets/fullscreen-exit.svg';
@@ -24,19 +25,24 @@ type CodeProps = {
   submitOnMount?: boolean;
 };
 
-type ValueGetter = () => string;
+type EditorInstance = monaco.editor.IStandaloneCodeEditor;
 
 export const Code: React.FC<CodeProps> = ({
   onSubmit,
   width,
   submitOnMount,
 }) => {
+  const [isEditorReady, setIsEditorReady] = useState(false);
+  const [editorValue, setEditorValue] = useState('');
   const [height, setHeight] = useState<number | undefined>(undefined);
   const [fullscreen, setFullscreen] = useState(false);
-  const [isEditorReady, setIsEditorReady] = useState(false);
   const [selectedExample, setSelectedExample] = useState<Example>(
     EXAMPLES[0].options[0],
   );
+
+  useEffect(() => {
+    setEditorValue(selectedExample.value);
+  }, [selectedExample]);
 
   const handleHotKey = (event: KeyboardEvent) => {
     event.preventDefault();
@@ -60,18 +66,17 @@ export const Code: React.FC<CodeProps> = ({
     onSubmit(option.value);
   };
 
-  const valueGetter = useRef<ValueGetter>();
-  const handleEditorDidMount = (getValue: ValueGetter) => {
-    valueGetter.current = getValue;
+  const handleEditorDidMount = (editor: EditorInstance) => {
     setIsEditorReady(true);
-    if (submitOnMount) handleSubmit();
-  };
-  const getCurrentValue = () => {
-    if (!valueGetter.current) return '';
-    return valueGetter.current();
+    if (submitOnMount) handleSubmit(editor.getValue());
   };
 
-  const handleSubmit = () => onSubmit(getCurrentValue());
+  const handleEditorChange = (value?: string) => {
+    setEditorValue(value || '');
+  };
+
+  const handleSubmit = (value: string = editorValue) =>
+    onSubmit(value);
 
   return (
     <Container>
@@ -101,8 +106,9 @@ export const Code: React.FC<CodeProps> = ({
               enabled: false,
             },
           }}
-          editorDidMount={handleEditorDidMount}
-          value={selectedExample.value}
+          onMount={handleEditorDidMount}
+          onChange={handleEditorChange}
+          value={editorValue}
           loading={<Loading>Loading code editor...</Loading>}
           width={width}
           height={height}
@@ -112,7 +118,7 @@ export const Code: React.FC<CodeProps> = ({
 
       <Button
         type="button"
-        onClick={handleSubmit}
+        onClick={() => handleSubmit()}
         disabled={!isEditorReady}
       >
         Execute
