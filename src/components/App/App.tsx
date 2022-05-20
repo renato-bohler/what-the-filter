@@ -130,7 +130,7 @@ export const App: React.FC = () => {
           toggleValues={handleToggleAllDiagramValues}
         />
         <Footer />
-        <ToastContainer />
+        <ToastContainer theme="dark" />
       </Container>
     );
 
@@ -152,7 +152,7 @@ export const App: React.FC = () => {
           submitOnMount
         />
         <Footer />
-        <ToastContainer />
+        <ToastContainer theme="dark" />
       </Container>
       <Diagram
         isOpen={isDiagramOpen}
