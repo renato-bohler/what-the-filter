@@ -3,7 +3,7 @@ import BaseSelect from 'react-select';
 import BaseEditor from '@monaco-editor/react';
 import styled from 'styled-components';
 
-type EditorProps = { $fullscreen: boolean; $width?: number };
+type EditorProps = { $fullscreen: boolean };
 
 export const Container = styled.section`
   display: flex;
@@ -85,7 +85,6 @@ export const EditorWrapper = styled.div<EditorProps>`
   position: ${({ $fullscreen }) =>
     $fullscreen ? 'static' : 'relative'};
   height: 100%;
-  width: ${({ $width }) => `${$width}px`};
 
   & > section:last-child {
     position: ${({ $fullscreen }) =>

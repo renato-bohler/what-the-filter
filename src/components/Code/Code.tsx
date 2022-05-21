@@ -90,7 +90,7 @@ export const Code: React.FC<CodeProps> = ({
 
       <Description>... and edit as you will</Description>
 
-      <EditorWrapper $fullscreen={fullscreen} $width={width}>
+      <EditorWrapper $fullscreen={fullscreen} style={{ width }}>
         <IconButton
           onClick={handleToggleFullscreen}
           title={fullscreen ? 'Contract editor' : 'Expand editor'}
