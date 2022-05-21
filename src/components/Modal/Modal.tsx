@@ -1,14 +1,15 @@
 import React, { PropsWithChildren, useRef } from 'react';
+
 import ReactDOM from 'react-dom';
 
 import { ReactComponent as Close } from 'src/assets/close.svg';
 
 import {
   Backdrop,
-  Window,
-  Title,
   CloseButton,
   Content,
+  Title,
+  Window,
 } from './Modal.css';
 
 const target = document.getElementById('root');

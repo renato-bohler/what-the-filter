@@ -1,12 +1,12 @@
-import { replace, generate } from 'abstract-syntax-tree';
+import { generate, replace } from 'abstract-syntax-tree';
 import { Program } from 'estree';
 
 import { MAIN_FUNCTION_NAME } from './const';
 import { getFirstNodeFromSource } from './getFirstNodeFromSource';
 import {
-  Value,
-  isReturnStatement,
   isExpressionStatement,
+  isReturnStatement,
+  Value,
 } from './types';
 
 export const getPartialValue = (

@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { SingleValue } from 'react-select';
+import React, { useEffect, useState } from 'react';
 
 import useHotkeys from '@reecelucas/react-use-hotkeys';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import { SingleValue } from 'react-select';
 
 import { ReactComponent as FullscreenEnter } from 'src/assets/fullscreen-enter.svg';
 import { ReactComponent as FullscreenExit } from 'src/assets/fullscreen-exit.svg';
 
 import {
+  Button,
   Container,
   Description,
-  Select,
   Editor,
-  Loading,
-  Button,
   EditorWrapper,
   IconButton,
+  Loading,
+  Select,
 } from './Code.css';
-import { EXAMPLES, Example } from './examples.const';
+import { Example, EXAMPLES } from './examples.const';
 
 type CodeProps = {
   onSubmit: (value: string) => void;

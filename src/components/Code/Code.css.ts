@@ -1,6 +1,5 @@
-import BaseSelect from 'react-select';
-
 import BaseEditor from '@monaco-editor/react';
+import BaseSelect from 'react-select';
 import styled from 'styled-components';
 
 type EditorProps = { $fullscreen: boolean };

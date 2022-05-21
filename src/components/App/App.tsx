@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import React, { useEffect, useState } from 'react';
+
+import { toast, ToastContainer } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Code } from 'src/components/Code/Code';
@@ -11,8 +13,6 @@ import { execute } from 'src/execute/execute';
 import { Result } from 'src/execute/utils/types';
 
 import { Container, SplitPane } from './App.css';
-
-import 'react-toastify/dist/ReactToastify.css';
 
 const DEFAULT_PANE_SIZE = () => Math.max(400, window.innerWidth / 2);
 const MAX_EDITOR_WIDTH = 1200;

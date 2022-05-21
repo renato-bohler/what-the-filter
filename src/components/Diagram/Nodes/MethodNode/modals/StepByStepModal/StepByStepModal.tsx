@@ -10,10 +10,10 @@ import {
 } from 'src/execute/utils/types';
 
 import {
+  CheckboxContainer,
+  Code,
   Subtitle,
   Table,
-  Code,
-  CheckboxContainer,
 } from './StepByStepModal.css';
 
 type StepByStepModalProps = {

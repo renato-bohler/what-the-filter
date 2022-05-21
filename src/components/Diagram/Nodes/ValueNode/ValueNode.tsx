@@ -7,16 +7,16 @@ import { ValueDisplay } from 'src/components/Diagram/Nodes/ValueDisplay/ValueDis
 import { ResultError, Value } from 'src/execute/utils/types';
 
 import {
+  CollapseButton,
   Container,
   Content,
-  CollapseButton,
   ErrorContainer,
-  ErrorMessage,
-  ErrorHintExample,
-  ErrorHintBadExample,
-  ErrorHintGoodExample,
-  ErrorHintComment,
   ErrorHint,
+  ErrorHintBadExample,
+  ErrorHintComment,
+  ErrorHintExample,
+  ErrorHintGoodExample,
+  ErrorMessage,
 } from './ValueNode.css';
 
 type Props = {

@@ -1,16 +1,17 @@
 import React from 'react';
+
 import ReactJSON from 'react-json-view';
 
 import { Value } from 'src/execute/utils/types';
 
 import {
-  GenericValue,
-  NullValue,
-  UndefinedValue,
-  StringValue,
-  NumberValue,
-  NaNValue,
   BooleanValue,
+  GenericValue,
+  NaNValue,
+  NullValue,
+  NumberValue,
+  StringValue,
+  UndefinedValue,
 } from './ValueDisplay.css';
 
 type Props = {

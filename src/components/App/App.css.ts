@@ -1,5 +1,4 @@
 import BaseSplitPane from 'react-split-pane';
-
 import styled from 'styled-components';
 
 export const Container = styled.div`

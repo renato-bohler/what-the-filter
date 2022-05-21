@@ -1,4 +1,4 @@
-import { parse, generate } from 'abstract-syntax-tree';
+import { generate, parse } from 'abstract-syntax-tree';
 
 import { getCallExpressionQueue } from './utils/getCallExpressionQueue';
 import { getErrorHint } from './utils/getErrorHint';
@@ -7,15 +7,15 @@ import { getRootCallExpression } from './utils/getRootCallExpression';
 import { getStepByStepExecution } from './utils/getStepByStepExecution';
 import { getWarnings } from './utils/getWarnings';
 import {
-  ValidationError,
+  isArrayExpression,
+  isCallExpression,
+  isIdentifier,
+  isMemberExpression,
+  isObjectExpression,
+  Method,
   Result,
   Step,
-  Method,
-  isIdentifier,
-  isCallExpression,
-  isMemberExpression,
-  isArrayExpression,
-  isObjectExpression,
+  ValidationError,
 } from './utils/types';
 
 export const execute = (source: string): Result => {

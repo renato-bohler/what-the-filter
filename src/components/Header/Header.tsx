@@ -1,13 +1,14 @@
 import React from 'react';
+
 import GitHubButton from 'react-github-button';
 
 import logo from 'src/assets/logo.png';
 
 import {
+  ButtonsContainer,
   Container,
   Logo,
   Title,
-  ButtonsContainer,
   TwitterButton,
   TwitterIcon,
 } from './Header.css';

@@ -24,7 +24,7 @@
   ],
   "plugins": [
     "@typescript-eslint",
-    "eslint-plugin-import-helpers",
+    "simple-import-sort",
     "testing-library",
     "jest",
     "jest-dom"
@@ -33,18 +33,17 @@
     "react/prop-types": "off",
     "no-shadow": "warn",
     "@typescript-eslint/no-empty-function": "off",
-    "import-helpers/order-imports": [
+    "simple-import-sort/exports": "warn",
+    "simple-import-sort/imports": [
       "warn",
       {
-        "newlinesBetween": "always",
         "groups": [
-          "/^react/",
-          "module",
-          "/^src/.*/",
-          "/^./modules/",
-          ["index", "parent", "sibling"]
-        ],
-        "alphabetize": { "order": "asc", "ignoreCase": true }
+          ["^\\u0000"], // Side effect imports
+          ["^react$"], // React
+          ["^@?\\w"], // External imports
+          ["^src/.*"], // Absolute imports
+          ["^\\."] // Relative imports
+        ]
       }
     ]
   }

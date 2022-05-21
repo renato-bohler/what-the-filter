@@ -1,5 +1,5 @@
 import { ARGUMENT_EXAMPLES } from './const';
-import { Step, ResultErrorHint } from './types';
+import { ResultErrorHint, Step } from './types';
 
 export const getErrorHint = (
   error: Error,

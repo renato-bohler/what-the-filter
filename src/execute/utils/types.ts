@@ -1,17 +1,17 @@
 import {
+  ArrayExpression,
+  ArrowFunctionExpression,
+  BlockStatement,
+  CallExpression,
+  ExpressionStatement,
+  FunctionExpression,
+  Identifier,
+  MemberExpression,
   Node,
+  ObjectExpression,
+  ReturnStatement,
   VariableDeclaration,
   VariableDeclarator,
-  Identifier,
-  BlockStatement,
-  ReturnStatement,
-  ExpressionStatement,
-  ArrowFunctionExpression,
-  FunctionExpression,
-  CallExpression,
-  MemberExpression,
-  ArrayExpression,
-  ObjectExpression,
 } from 'estree';
 
 export class ValidationError extends Error {

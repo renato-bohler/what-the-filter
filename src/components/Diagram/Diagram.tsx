@@ -3,13 +3,13 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { ResultError, Step } from 'src/execute/utils/types';
 
 import {
-  Container,
   CloseButton,
+  Container,
   NodesContainer,
-  ZoomContainer,
-  ZoomButton,
-  ZoomDivider,
   ToggleButton,
+  ZoomButton,
+  ZoomContainer,
+  ZoomDivider,
 } from './Diagram.css';
 import { Arrow } from './Nodes/Arrow/Arrow';
 import { MethodNode } from './Nodes/MethodNode/MethodNode';

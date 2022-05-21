@@ -15,10 +15,10 @@ import {
   Container,
   Content,
   Documentation,
+  ExtraButton,
+  ExtraButtonsContainer,
   MethodTitle,
   SectionTitle,
-  ExtraButtonsContainer,
-  ExtraButton,
 } from './MethodNode.css';
 import { StepByStepModal } from './modals/StepByStepModal/StepByStepModal';
 import { WarningsModal } from './modals/WarningsModal/WarningsModal';

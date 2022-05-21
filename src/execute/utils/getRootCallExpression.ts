@@ -1,15 +1,15 @@
-import { Program, CallExpression } from 'estree';
+import { CallExpression, Program } from 'estree';
 
 import { INVALID_CODE_ERRORS, MAIN_FUNCTION_NAME } from './const';
 import {
-  ValidationError,
-  isIdentifier,
+  isArrowFunctionExpression,
   isBlockStatement,
+  isCallExpression,
+  isIdentifier,
   isReturnStatement,
   isVariableDeclaration,
   isVariableDeclarator,
-  isCallExpression,
-  isArrowFunctionExpression,
+  ValidationError,
 } from './types';
 
 const {

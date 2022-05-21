@@ -1,28 +1,28 @@
 import { generate, replace } from 'abstract-syntax-tree';
 import {
-  Program,
-  ExpressionStatement,
   CallExpression,
+  ExpressionStatement,
   MemberExpression,
+  Program,
   VariableDeclaration,
 } from 'estree';
 
 import {
-  EXECUTION_STEPS_VARIABLE_NAME,
   EXECUTION_STEP_VARIABLE_NAME,
+  EXECUTION_STEPS_VARIABLE_NAME,
   MAIN_FUNCTION_NAME,
 } from './const';
 import { getFirstNodeFromSource } from './getFirstNodeFromSource';
 import {
-  Step,
   ExecutionSteps,
   isArrowFunctionExpression,
+  isBlockStatement,
+  isExpressionStatement,
   isFunctionExpression,
   isIdentifier,
-  isBlockStatement,
   isReturnStatement,
-  isExpressionStatement,
   isVariableDeclarator,
+  Step,
 } from './types';
 
 const getTransformedCallback = (
