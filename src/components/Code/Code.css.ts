@@ -2,7 +2,10 @@ import BaseEditor from '@monaco-editor/react';
 import BaseSelect from 'react-select';
 import styled from 'styled-components';
 
-type EditorProps = { $fullscreen: boolean };
+type WithFullscreen = { $fullscreen: boolean };
+
+const MENU_BAR_HEIGHT = 50;
+const FOOTER_HEIGHT = 40;
 
 export const Container = styled.section`
   display: flex;
@@ -80,7 +83,7 @@ export const Select = styled(BaseSelect)`
   }
 ` as typeof BaseSelect;
 
-export const EditorWrapper = styled.div<EditorProps>`
+export const EditorWrapper = styled.div<WithFullscreen>`
   position: ${({ $fullscreen }) =>
     $fullscreen ? 'static' : 'relative'};
   height: 100%;
@@ -88,18 +91,59 @@ export const EditorWrapper = styled.div<EditorProps>`
   & > section:last-child {
     position: ${({ $fullscreen }) =>
       $fullscreen ? 'absolute !important' : 'relative'};
-    top: 0;
+    top: ${({ $fullscreen }) =>
+      $fullscreen ? MENU_BAR_HEIGHT : 0}px;
     right: 0;
-    bottom: 0;
     left: 0;
     z-index: ${({ $fullscreen }) => ($fullscreen ? '2' : '1')};
 
     width: ${({ $fullscreen }) =>
       $fullscreen ? 'auto !important' : 'inherit'};
+    height: ${({ $fullscreen }) =>
+      $fullscreen
+        ? `calc(100% - ${
+            MENU_BAR_HEIGHT + FOOTER_HEIGHT
+          }px) !important`
+        : '100%'};
   }
 `;
 
-export const Editor = styled(BaseEditor)<EditorProps>`
+export const EditorMenuBar = styled.div<WithFullscreen>`
+  display: ${({ $fullscreen }) => ($fullscreen ? 'flex' : 'none')};
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+
+  width: 100%;
+  height: ${MENU_BAR_HEIGHT}px;
+
+  background: black;
+  padding-left: 16px;
+`;
+
+export const MenuBarButtonContainer = styled.div`
+  margin-left: auto;
+  height: 100%;
+`;
+
+export const MenuBarButton = styled.button`
+  background: #f23333;
+  border: none;
+
+  font-family: Sriracha;
+  font-size: 20px;
+  color: white;
+
+  height: 100%;
+  padding: 0 16px;
+
+  cursor: pointer;
+`;
+
+export const Editor = styled(BaseEditor)<WithFullscreen>`
   min-height: 300px;
 
   border-radius: ${({ $fullscreen }) => ($fullscreen ? '0' : '12px')};
@@ -108,6 +152,35 @@ export const Editor = styled(BaseEditor)<EditorProps>`
     $fullscreen ? 'none' : '2px solid white'};
 
   flex: 1;
+`;
+
+export const EditorFooter = styled.div<WithFullscreen>`
+  display: ${({ $fullscreen }) => ($fullscreen ? 'flex' : 'none')};
+  align-items: center;
+  justify-content: space-between;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+
+  width: 100%;
+  height: ${FOOTER_HEIGHT}px;
+  padding: 0 16px;
+
+  font-family: monospace;
+  background: black;
+`;
+
+export const FooterLink = styled.a`
+  color: #f23333;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    color: #f23333a0;
+    text-decoration: underline;
+  }
 `;
 
 export const Loading = styled.div`
@@ -143,9 +216,10 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const IconButton = styled.button`
+export const IconButton = styled.button<WithFullscreen>`
   position: absolute;
-  top: 16px;
+  top: ${({ $fullscreen }) =>
+    16 + ($fullscreen ? MENU_BAR_HEIGHT : 0)}px;
   right: 32px;
   z-index: 3;
 

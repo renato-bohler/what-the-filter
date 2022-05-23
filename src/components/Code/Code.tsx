@@ -12,9 +12,14 @@ import {
   Container,
   Description,
   Editor,
+  EditorFooter,
+  EditorMenuBar,
   EditorWrapper,
+  FooterLink,
   IconButton,
   Loading,
+  MenuBarButton,
+  MenuBarButtonContainer,
   Select,
 } from './Code.css';
 import { Example, EXAMPLES } from './examples.const';
@@ -91,12 +96,37 @@ export const Code: React.FC<CodeProps> = ({
       <Description>... and edit as you will</Description>
 
       <EditorWrapper $fullscreen={fullscreen} style={{ width }}>
+        <EditorMenuBar $fullscreen={fullscreen}>
+          what the filter?
+          <MenuBarButtonContainer>
+            <MenuBarButton
+              onClick={() => handleSubmit()}
+              title="CTRL + S"
+            >
+              Execute
+            </MenuBarButton>
+          </MenuBarButtonContainer>
+        </EditorMenuBar>
+
         <IconButton
           onClick={handleToggleFullscreen}
           title={fullscreen ? 'Contract editor' : 'Expand editor'}
+          $fullscreen={fullscreen}
         >
           {fullscreen ? <FullscreenExit /> : <FullscreenEnter />}
         </IconButton>
+
+        <EditorFooter $fullscreen={fullscreen}>
+          <span>
+            Made by{' '}
+            <FooterLink
+              href="https://renato-bohler.github.io/"
+              rel="noopener noreferrer"
+            >
+              Renato Böhler
+            </FooterLink>
+          </span>
+        </EditorFooter>
 
         <Editor
           theme="vs-dark"
