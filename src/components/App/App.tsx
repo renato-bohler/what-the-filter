@@ -2,6 +2,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import React, { useEffect, useState } from 'react';
 
+import { compressToEncodedURIComponent } from 'lz-string';
 import { toast, ToastContainer } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -71,7 +72,15 @@ export const App: React.FC = () => {
       window.removeEventListener('resize', handleWindowResize);
   }, []);
 
-  const handleCodeSubmit = (code: string) => {
+  const addCodeToAddress = (code: string) => {
+    history.replaceState(
+      {},
+      '',
+      `/#code/${compressToEncodedURIComponent(code)}`,
+    );
+  };
+
+  const handleCodeSubmit = (code: string, auto = false) => {
     setDiagramNodes([]);
 
     setTimeout(() => {
@@ -84,6 +93,7 @@ export const App: React.FC = () => {
         setDiagramNodes(generateNodesFromSource(source));
         setDiagramOpen(true);
         if (paneSize === 0) setPaneSize(DEFAULT_PANE_SIZE);
+        if (!auto) addCodeToAddress(code);
       } catch (error) {
         toast((error as Error).message, {
           type: 'error',
