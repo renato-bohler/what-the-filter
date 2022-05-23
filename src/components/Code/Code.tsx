@@ -53,7 +53,6 @@ export const Code: React.FC<CodeProps> = ({
       const compressedCode = location.hash
         .replace('#code/', '')
         .trim();
-      console.log('compressedCode:', compressedCode);
       const code = decompressFromEncodedURIComponent(compressedCode);
 
       if (code) {
