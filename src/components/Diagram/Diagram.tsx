@@ -207,7 +207,7 @@ export const Diagram: React.FC<DiagramProps> = ({
                 );
             })
           ) : (
-            <span>Loading...</span>
+            <span>Generating diagram...</span>
           )}
         </NodesContainer>
       </div>

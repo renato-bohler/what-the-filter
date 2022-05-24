@@ -7,3 +7,12 @@ Object.defineProperty(window, 'matchMedia', {
     matches: query === '(hover: none) and (pointer: coarse)',
   }),
 });
+
+// Sandboxed JS execution does not work on test ENV
+jest.mock('./execute/utils/sandbox', () => ({
+  sandbox: (code: string) =>
+    new Function(`
+      const result = (() => {${code}})();
+      return result;
+    `)(),
+}));

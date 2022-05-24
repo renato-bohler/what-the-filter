@@ -3,16 +3,17 @@ import { Program } from 'estree';
 
 import { MAIN_FUNCTION_NAME } from './const';
 import { getFirstNodeFromSource } from './getFirstNodeFromSource';
+import { sandbox } from './sandbox';
 import {
   isExpressionStatement,
   isReturnStatement,
   Value,
 } from './types';
 
-export const getPartialValue = (
+export const getPartialValue = async (
   tree: Program,
   source: string,
-): Value => {
+): Promise<Value> => {
   let replaced = false;
   const treeCopy = JSON.parse(JSON.stringify(tree));
   const returnExpression = getFirstNodeFromSource(source);
@@ -27,8 +28,8 @@ export const getPartialValue = (
     },
   });
 
-  // eslint-disable-next-line no-new-func
-  return new Function(
-    `${generate(newTree)}; return ${MAIN_FUNCTION_NAME}();`,
-  )();
+  return await sandbox<Value>(`
+    ${generate(newTree)};
+    return ${MAIN_FUNCTION_NAME}();
+  `);
 };

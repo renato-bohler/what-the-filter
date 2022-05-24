@@ -83,9 +83,9 @@ export const App: React.FC = () => {
   const handleCodeSubmit = (code: string, auto = false) => {
     setDiagramNodes([]);
 
-    setTimeout(() => {
+    setTimeout(async () => {
       try {
-        const source = execute(code);
+        const source = await execute(code);
 
         if (source.steps.length === 0)
           throw new Error('Empty result');

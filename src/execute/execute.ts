@@ -18,7 +18,7 @@ import {
   ValidationError,
 } from './utils/types';
 
-export const execute = (source: string): Result => {
+export const execute = async (source: string): Promise<Result> => {
   const steps: Step[] = [];
 
   try {
@@ -26,9 +26,9 @@ export const execute = (source: string): Result => {
     const callExpression = getRootCallExpression(tree);
     const executionSteps = getCallExpressionQueue(callExpression);
 
-    executionSteps.forEach((node, index) => {
-      if (!isMemberExpression(node.callee)) return;
-      if (!isIdentifier(node.callee.property)) return;
+    for (const [index, node] of executionSteps.entries()) {
+      if (!isMemberExpression(node.callee)) continue;
+      if (!isIdentifier(node.callee.property)) continue;
       if (
         !isIdentifier(node.callee.object) &&
         !isArrayExpression(node.callee.object) &&
@@ -36,7 +36,7 @@ export const execute = (source: string): Result => {
         !isCallExpression(node.callee.object) &&
         !isMemberExpression(node.callee.object)
       )
-        return;
+        continue;
 
       const method = node.callee.property.name;
       const isObject =
@@ -52,23 +52,26 @@ export const execute = (source: string): Result => {
       step.method = `${isObject ? 'Object.' : ''}${method}` as Method;
       step.arguments = args;
       if (index === 0) {
-        step.input = isObject
-          ? getPartialValue(tree, `(${generate(node.arguments[0])})`)
-          : getPartialValue(tree, generate(node.callee.object));
+        step.input = await getPartialValue(
+          tree,
+          isObject
+            ? `(${generate(node.arguments[0])})`
+            : generate(node.callee.object),
+        );
       } else {
         step.input = steps[index - 1].output;
       }
 
-      step.output = getPartialValue(tree, generate(node));
+      step.output = await getPartialValue(tree, generate(node));
       try {
-        step.executionSteps = getStepByStepExecution(
+        step.executionSteps = await getStepByStepExecution(
           tree,
           step,
           node,
         );
       } catch (e) {}
       step.warnings = getWarnings(step);
-    });
+    }
 
     return {
       steps,

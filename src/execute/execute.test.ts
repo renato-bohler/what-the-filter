@@ -12,13 +12,13 @@ const wrap = (source: string[]) =>
   ].join('\n');
 
 describe('Object', () => {
-  test('entries', () => {
+  test('entries', async () => {
     const source = wrap([
       'const input = { a: 1, b: 2, c: 3, d: 4 };',
       'return Object.entries(input);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -35,13 +35,13 @@ describe('Object', () => {
     });
   });
 
-  test('fromEntries', () => {
+  test('fromEntries', async () => {
     const source = wrap([
       "const input = [['a', 1], ['b', 2], ['c', 3], ['d', 4]];",
       'return Object.fromEntries(input);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -58,13 +58,13 @@ describe('Object', () => {
     });
   });
 
-  test('values', () => {
+  test('values', async () => {
     const source = wrap([
       'const input = { a: 1, b: 2, c: 3, d: 4 };',
       'return Object.values(input);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -76,13 +76,13 @@ describe('Object', () => {
     });
   });
 
-  test('keys', () => {
+  test('keys', async () => {
     const source = wrap([
       'const input = { a: 1, b: 2, c: 3, d: 4 };',
       'return Object.keys(input);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -96,13 +96,13 @@ describe('Object', () => {
 });
 
 describe('Array', () => {
-  test('flat', () => {
+  test('flat', async () => {
     const source = wrap([
       'const input = [[1, [2]], 3, [4, [5, [6, 7]]], 8];',
       'return input.flat().flat().flat();',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(3);
@@ -126,13 +126,13 @@ describe('Array', () => {
     });
   });
 
-  test('flatMap', () => {
+  test('flatMap', async () => {
     const source = wrap([
       'const input = [1, 2, 3, 4];',
       'return input.flatMap(x => [x, x * 2]);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -144,13 +144,13 @@ describe('Array', () => {
     });
   });
 
-  test('concat', () => {
+  test('concat', async () => {
     const source = wrap([
       'const input = [];',
       'return input.concat(1).concat([2, 3]).concat([4, 5],[6, 7])',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(3);
@@ -174,7 +174,7 @@ describe('Array', () => {
     });
   });
 
-  test('find', () => {
+  test('find', async () => {
     const source = wrap([
       'const input = [',
       "  { id: 1, name: 'Renato' },",
@@ -183,7 +183,7 @@ describe('Array', () => {
       "return input.find(item => item.name === 'Renato')",
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -198,7 +198,7 @@ describe('Array', () => {
     });
   });
 
-  test('findIndex', () => {
+  test('findIndex', async () => {
     const source = wrap([
       'const input = [',
       "  { id: 1, name: 'Renato' },",
@@ -207,7 +207,7 @@ describe('Array', () => {
       "return input.findIndex(item => item.name === 'Böhler')",
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -222,13 +222,13 @@ describe('Array', () => {
     });
   });
 
-  test('indexOf', () => {
+  test('indexOf', async () => {
     const source = wrap([
       'const input = [10, 20, 30, 40, 50, 50];',
       'return input.indexOf(50, 2);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -240,13 +240,13 @@ describe('Array', () => {
     });
   });
 
-  test('lastIndexOf', () => {
+  test('lastIndexOf', async () => {
     const source = wrap([
       'const input = [50, 50, 50, 50, 50];',
       'return input.lastIndexOf(50, 2);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -258,13 +258,13 @@ describe('Array', () => {
     });
   });
 
-  test('every', () => {
+  test('every', async () => {
     const source = wrap([
       'const input = [50, 50, 50, 50, 50];',
       'return input.every(n => n === 50);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -276,13 +276,13 @@ describe('Array', () => {
     });
   });
 
-  test('some', () => {
+  test('some', async () => {
     const source = wrap([
       'const input = [10, 20, 30, 40, 50];',
       'return input.some(n => n < 10);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -294,13 +294,13 @@ describe('Array', () => {
     });
   });
 
-  test('join', () => {
+  test('join', async () => {
     const source = wrap([
       'const input = [10, 20, 30, 40, 50];',
       "return input.join(', ')",
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -312,13 +312,13 @@ describe('Array', () => {
     });
   });
 
-  test('includes', () => {
+  test('includes', async () => {
     const source = wrap([
       'const input = [10, 20, 30, 40, 50];',
       'return input.includes(30);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -332,13 +332,13 @@ describe('Array', () => {
 });
 
 describe('Array execution steps', () => {
-  test('filter', () => {
+  test('filter', async () => {
     const source = wrap([
       'const input = [...Array(10).keys()];',
       'return input.filter(n => n % 2 === 1);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -412,13 +412,13 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('filter (by index)', () => {
+  test('filter (by index)', async () => {
     const source = wrap([
       'const input = Array(5).fill(1);',
       'return input.filter((_, index) => index % 2 === 0);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -462,13 +462,13 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('filter (Boolean)', () => {
+  test('filter (Boolean)', async () => {
     const source = wrap([
       "const input = [true, false, 1, 0, 'a', ''];",
       'return input.filter(Boolean);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -518,13 +518,13 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('map', () => {
+  test('map', async () => {
     const source = wrap([
       'const input = [...Array(10).keys()];',
       'return input.map(n => n ** 2);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -598,7 +598,7 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('map (multiple returns)', () => {
+  test('map (multiple returns)', async () => {
     const source = wrap([
       'const input = [...Array(5).keys()];',
       'return input.map((value) => {',
@@ -609,7 +609,7 @@ describe('Array execution steps', () => {
       '});',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -662,14 +662,14 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('map (identifier callback)', () => {
+  test('map (identifier callback)', async () => {
     const source = wrap([
       'const input = [...Array(5).keys()];',
       'const callback = (value) => value ** 2;',
       'return input.map(callback);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -713,13 +713,13 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('reduce', () => {
+  test('reduce', async () => {
     const source = wrap([
       'const input = [...Array(10).keys()].map(n => n + 10);',
       'return input.reduce((acc, cur) => acc + cur, 0);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -803,13 +803,13 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('reduce (no initial value)', () => {
+  test('reduce (no initial value)', async () => {
     const source = wrap([
       'const input = [...Array(10).keys()].map(n => n + 10);',
       'return input.reduce((acc, cur) => acc + cur);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -886,7 +886,7 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('reduce (with mutation)', () => {
+  test('reduce (with mutation)', async () => {
     const source = wrap([
       'const input = [...Array(10).keys()].map(n => n + 10);',
       'return input.reduce(function (acc, cur) {',
@@ -895,7 +895,7 @@ describe('Array execution steps', () => {
       '}, 0);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -952,13 +952,13 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('reduce (callback concise body)', () => {
+  test('reduce (callback concise body)', async () => {
     const source = wrap([
       'const input = [...Array(3).keys()].map(n => n + 10);',
       'return input.reduce((acc, cur) => acc + cur, 0);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -993,13 +993,13 @@ describe('Array execution steps', () => {
     });
   });
 
-  test('reduce (rest element)', () => {
+  test('reduce (rest element)', async () => {
     const source = wrap([
       'const input = [...Array(3).keys()].map(n => n + 10);',
       'return input.reduce((acc, ...rest) => acc + rest[0], 0);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1036,7 +1036,7 @@ describe('Array execution steps', () => {
 });
 
 describe('Array mutating methods', () => {
-  test('sort', () => {
+  test('sort', async () => {
     const source = wrap([
       'const input = [',
       "  { name: 'Charlie' },",
@@ -1046,7 +1046,7 @@ describe('Array mutating methods', () => {
       'return input.sort((a, b) => a > b ? 1 : -1);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1069,13 +1069,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('reverse', () => {
+  test('reverse', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.reverse();',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1090,13 +1090,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('splice', () => {
+  test('splice', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.splice(0, 2);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1111,13 +1111,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('copyWithin', () => {
+  test('copyWithin', async () => {
     const source = wrap([
       'const input = [1, 2, 3, 4, 5];',
       'return input.copyWithin(0, 3 ,4);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1132,13 +1132,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('fill', () => {
+  test('fill', async () => {
     const source = wrap([
       'const input = [1, 2, 3, 4, 5];',
       'return input.fill(0);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1153,13 +1153,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('pop', () => {
+  test('pop', async () => {
     const source = wrap([
       'const input = [1, 2, 3, 4, 5];',
       'return input.pop();',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1174,13 +1174,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('push', () => {
+  test('push', async () => {
     const source = wrap([
       'const input = [1, 2, 3, 4, 5];',
       'return input.push(6);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1195,13 +1195,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('shift', () => {
+  test('shift', async () => {
     const source = wrap([
       'const input = [1, 2, 3, 4, 5];',
       'return input.shift();',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1216,13 +1216,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('unshift', () => {
+  test('unshift', async () => {
     const source = wrap([
       'const input = [1, 2, 3, 4, 5];',
       'return input.unshift(0);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1237,13 +1237,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('Mutating self reference', () => {
+  test('Mutating self reference', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.map((item, index, array) => array.reverse())',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1259,13 +1259,13 @@ describe('Array mutating methods', () => {
     });
   });
 
-  test('Mutating self reference with slice', () => {
+  test('Mutating self reference with slice', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.map(() => input.reverse().slice());',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1283,13 +1283,13 @@ describe('Array mutating methods', () => {
 });
 
 describe('Specific scenarios', () => {
-  test('Accessing object property', () => {
+  test('Accessing object property', async () => {
     const source = wrap([
       'const input = { a: [1, 2, 3], b: [4, 5, 6] };',
       'return input.a.map(n => n + 1);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1301,13 +1301,13 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Accessing array item', () => {
+  test('Accessing array item', async () => {
     const source = wrap([
       'const input = [{ a: [1, 2, 3] }, { b: [4, 5, 6] }];',
       'return Object.values(input[0])',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1319,14 +1319,14 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Using functions declared on scope', () => {
+  test('Using functions declared on scope', async () => {
     const source = wrap([
       'const input = [...Array(10).keys()];',
       'const isEven = n => n % 2 === 0;',
       'return input.filter(isEven);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1338,14 +1338,14 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Declaring function with let instead of const', () => {
+  test('Declaring function with let instead of const', async () => {
     const source = [
       `const ${MAIN_FUNCTION_NAME} = () => {`,
       '  return [1,2,3].map(n => n + 1);',
       '}',
     ].join('\n');
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1357,7 +1357,7 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Map object keys and values', () => {
+  test('Map object keys and values', async () => {
     const source = wrap([
       'const input = { a: 1, b: 2, c: 3 };',
       'return Object.fromEntries(',
@@ -1365,7 +1365,7 @@ describe('Specific scenarios', () => {
       ');',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(3);
@@ -1407,13 +1407,13 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Array mapping, filtering, slicing and reducing', () => {
+  test('Array mapping, filtering, slicing and reducing', async () => {
     const source = wrap([
       'const input = [1, 2, 3, 4, 5, 6, 7, 8];',
       'return input.map(i => i - 1).filter(i => i % 2 === 0).slice(2, 4).reduce((acc, cur) => acc + cur, 0)',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(4);
@@ -1443,7 +1443,7 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Array of objects', () => {
+  test('Array of objects', async () => {
     const source = wrap([
       'const input = [',
       "  { id: 1, name: 'Renato' },",
@@ -1452,7 +1452,7 @@ describe('Specific scenarios', () => {
       "return input.filter(item => item.name.includes('Böh'))",
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1467,13 +1467,13 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Object of arrays', () => {
+  test('Object of arrays', async () => {
     const source = wrap([
       'const input = { a: [1, 2, 3], b: [4, 5, 6] };',
       'return Object.entries(input).reduce((acc, cur) => {acc.push(cur[1]);return acc;}, []).flat();',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(3);
@@ -1503,13 +1503,13 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Self reference', () => {
+  test('Self reference', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.filter(i => i === input[0]);',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1521,13 +1521,13 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Nested function calls', () => {
+  test('Nested function calls', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.map(function(i1){ return input.filter(i2 => i2 !== i1).reduce((acc, cur) => acc + cur)});',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1541,13 +1541,13 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Nested arrow function calls', () => {
+  test('Nested arrow function calls', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.map(i1 => input.filter(i2 => i2 !== i1).reduce((acc, cur) => acc + cur));',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1561,13 +1561,13 @@ describe('Specific scenarios', () => {
     });
   });
 
-  test('Directly using array expression on top-level', () => {
+  test('Directly using array expression on top-level', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return ([3,4,5]).filter(n => input.includes(n));',
     ]);
 
-    const { steps, success } = execute(source);
+    const { steps, success } = await execute(source);
 
     expect(success).toBe(true);
     expect(steps).toHaveLength(1);
@@ -1581,13 +1581,13 @@ describe('Specific scenarios', () => {
 });
 
 describe('Error cases', () => {
-  test('Incorrect input to method', () => {
+  test('Incorrect input to method', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.reduce((acc, cur) => ({...acc, [`${cur}`]: cur ** 2}), {}).filter(a => a)',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1609,13 +1609,13 @@ describe('Error cases', () => {
     });
   });
 
-  test('Null input to method', () => {
+  test('Null input to method', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.reduce((acc, cur) => null).reduce((acc, cur) => acc + cur)',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1634,13 +1634,13 @@ describe('Error cases', () => {
     });
   });
 
-  test('Undefined input to method', () => {
+  test('Undefined input to method', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.find(a => a === 0).flatMap(a => a);',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1659,13 +1659,13 @@ describe('Error cases', () => {
     });
   });
 
-  test('No callback to method', () => {
+  test('No callback to method', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.filter(n => n > 1).map();',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1684,13 +1684,13 @@ describe('Error cases', () => {
     });
   });
 
-  test('No callback to flatMap', () => {
+  test('No callback to flatMap', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.filter(n => n > 1).flatMap();',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1709,13 +1709,13 @@ describe('Error cases', () => {
     });
   });
 
-  test('No initial value on reduce for empty array', () => {
+  test('No initial value on reduce for empty array', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.filter(n => n > 3).reduce((acc, cur) => acc + cur)',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1734,13 +1734,13 @@ describe('Error cases', () => {
     });
   });
 
-  test('Incorrect Object.fromEntries input', () => {
+  test('Incorrect Object.fromEntries input', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return Object.fromEntries(input);',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1753,13 +1753,13 @@ describe('Error cases', () => {
     });
   });
 
-  test('Null Object.fromEntries input', () => {
+  test('Null Object.fromEntries input', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return Object.fromEntries(input.reduce(() => null));',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1778,13 +1778,13 @@ describe('Error cases', () => {
     });
   });
 
-  test('Null Object.keys input', () => {
+  test('Null Object.keys input', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return Object.keys(input.reduce(() => null));',
     ]);
 
-    const { steps, success, error } = execute(source);
+    const { steps, success, error } = await execute(source);
 
     expect(success).toBe(false);
     expect(error?.hint).not.toBe(null);
@@ -1805,35 +1805,39 @@ describe('Error cases', () => {
 });
 
 describe('Validations', () => {
-  test('Arrow function without block statement', () => {
+  test('Arrow function without block statement', async () => {
     const source = `const ${MAIN_FUNCTION_NAME} = () => 1`;
 
-    expect(() => execute(source)).toThrow(INVALID_CODE_ERRORS.BLOCK);
+    await expect(() => execute(source)).rejects.toThrow(
+      INVALID_CODE_ERRORS.BLOCK,
+    );
   });
 
-  test('Async function', () => {
+  test('Async function', async () => {
     const source = [
       `const ${MAIN_FUNCTION_NAME} = async () => {`,
       '  return [1, 2, 3].map(n => n + 1);',
       '}',
     ].join('\n');
 
-    expect(() => execute(source)).toThrow(INVALID_CODE_ERRORS.ASYNC);
+    await expect(() => execute(source)).rejects.toThrow(
+      INVALID_CODE_ERRORS.ASYNC,
+    );
   });
 
-  test('Multiple variable declarations', () => {
+  test('Multiple variable declarations', async () => {
     const source = [
       `const a = 1, ${MAIN_FUNCTION_NAME} = () => {`,
       '  return ([1, 2, 3]).sort();',
       '}',
     ].join('\n');
 
-    expect(() => execute(source)).toThrow(
+    await expect(() => execute(source)).rejects.toThrow(
       INVALID_CODE_ERRORS.VARIABLE_DECLARATION,
     );
   });
 
-  test('Multiple statements', () => {
+  test('Multiple statements', async () => {
     const source = [
       `const ${MAIN_FUNCTION_NAME} = () => {`,
       '  return ([1, 2, 3]).sort();',
@@ -1841,58 +1845,62 @@ describe('Validations', () => {
       'const a = 1;',
     ].join('\n');
 
-    expect(() => execute(source)).toThrow(
+    await expect(() => execute(source)).rejects.toThrow(
       INVALID_CODE_ERRORS.ONE_STATEMENT,
     );
   });
 
-  test('Function with no return statement', () => {
+  test('Function with no return statement', async () => {
     const source = wrap(['const input = [1, 2, 3];']);
 
-    expect(() => execute(source)).toThrow(INVALID_CODE_ERRORS.RETURN);
+    await expect(() => execute(source)).rejects.toThrow(
+      INVALID_CODE_ERRORS.RETURN,
+    );
   });
 
-  test('Function with code after return statement', () => {
+  test('Function with code after return statement', async () => {
     const source = wrap([
       'const input = [1, 2, 3];',
       'return input.map(n => n + 1);',
       'input.sort();',
     ]);
 
-    expect(() => execute(source)).toThrow(INVALID_CODE_ERRORS.RETURN);
+    await expect(() => execute(source)).rejects.toThrow(
+      INVALID_CODE_ERRORS.RETURN,
+    );
   });
 
-  test('Null input', () => {
+  test('Null input', async () => {
     const source = wrap(['const input = null;', 'return input;']);
 
-    expect(() => execute(source)).toThrow(
+    await expect(() => execute(source)).rejects.toThrow(
       INVALID_CODE_ERRORS.RETURN_TYPE,
     );
   });
 
-  test('Undefined input', () => {
+  test('Undefined input', async () => {
     const source = wrap([
       'const input = undefined;',
       'return input;',
     ]);
 
-    expect(() => execute(source)).toThrow(
+    await expect(() => execute(source)).rejects.toThrow(
       INVALID_CODE_ERRORS.RETURN_TYPE,
     );
   });
 
-  test('String input', () => {
+  test('String input', async () => {
     const source = wrap(["const input = 'string';", 'return input;']);
 
-    expect(() => execute(source)).toThrow(
+    await expect(() => execute(source)).rejects.toThrow(
       INVALID_CODE_ERRORS.RETURN_TYPE,
     );
   });
 
-  test('Number input', () => {
+  test('Number input', async () => {
     const source = wrap(['const input = 123;', 'return input;']);
 
-    expect(() => execute(source)).toThrow(
+    await expect(() => execute(source)).rejects.toThrow(
       INVALID_CODE_ERRORS.RETURN_TYPE,
     );
   });

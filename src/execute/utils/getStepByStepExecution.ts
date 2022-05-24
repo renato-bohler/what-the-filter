@@ -13,6 +13,7 @@ import {
   MAIN_FUNCTION_NAME,
 } from './const';
 import { getFirstNodeFromSource } from './getFirstNodeFromSource';
+import { sandbox } from './sandbox';
 import {
   ExecutionSteps,
   isArrowFunctionExpression,
@@ -180,9 +181,13 @@ const getTransformedCallback = (
   return generate(newTree);
 };
 
-const generateStepExecution = (source: string): ExecutionSteps[] => {
-  // eslint-disable-next-line no-new-func
-  return new Function(`${source}; return ${MAIN_FUNCTION_NAME}();`)();
+const generateStepExecution = async (
+  source: string,
+): Promise<ExecutionSteps[]> => {
+  return await sandbox<ExecutionSteps[]>(`
+    ${source};
+    return ${MAIN_FUNCTION_NAME}();
+  `);
 };
 
 const generateStepByStepExecution = (
@@ -203,23 +208,23 @@ const generateStepByStepExecution = (
   return executionSteps;
 };
 
-export const getStepByStepExecution = (
+export const getStepByStepExecution = async (
   tree: Program,
   step: Step,
   node: CallExpression,
-): ExecutionSteps[] | undefined => {
+): Promise<ExecutionSteps[] | undefined> => {
   const treeCopy = JSON.parse(JSON.stringify(tree));
   const nodeCopy = JSON.parse(JSON.stringify(node));
 
   if (step.method === 'filter' || step.method === 'map')
-    return generateStepByStepExecution(treeCopy, nodeCopy, [
+    return await generateStepByStepExecution(treeCopy, nodeCopy, [
       'input',
       'index',
       'array',
     ]);
 
   if (step.method === 'reduce')
-    return generateStepByStepExecution(treeCopy, nodeCopy, [
+    return await generateStepByStepExecution(treeCopy, nodeCopy, [
       'accumulator',
       'current',
       'index',
