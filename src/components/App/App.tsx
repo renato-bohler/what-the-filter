@@ -1,4 +1,4 @@
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import React, { useEffect, useState } from 'react';
 
@@ -73,11 +73,9 @@ export const App: React.FC = () => {
   }, []);
 
   const addCodeToAddress = (code: string) => {
-    history.replaceState(
-      {},
-      '',
-      `/#code/${compressToEncodedURIComponent(code)}`,
-    );
+    window.location.hash = `#code/${compressToEncodedURIComponent(
+      code,
+    )}`;
   };
 
   const handleCodeSubmit = (code: string, auto = false) => {
