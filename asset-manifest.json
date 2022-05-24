@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "https://renato-bohler.github.io/what-the-filter/static/css/main.a42f11af.chunk.css",
-    "main.js": "https://renato-bohler.github.io/what-the-filter/static/js/main.f24498c3.chunk.js",
-    "main.js.map": "https://renato-bohler.github.io/what-the-filter/static/js/main.f24498c3.chunk.js.map",
+    "main.js": "https://renato-bohler.github.io/what-the-filter/static/js/main.c1df0c4d.chunk.js",
+    "main.js.map": "https://renato-bohler.github.io/what-the-filter/static/js/main.c1df0c4d.chunk.js.map",
     "runtime-main.js": "https://renato-bohler.github.io/what-the-filter/static/js/runtime-main.da3673ff.js",
     "runtime-main.js.map": "https://renato-bohler.github.io/what-the-filter/static/js/runtime-main.da3673ff.js.map",
     "static/css/2.b8fe46b5.chunk.css": "https://renato-bohler.github.io/what-the-filter/static/css/2.b8fe46b5.chunk.css",
-    "static/js/2.f4a9fd57.chunk.js": "https://renato-bohler.github.io/what-the-filter/static/js/2.f4a9fd57.chunk.js",
-    "static/js/2.f4a9fd57.chunk.js.map": "https://renato-bohler.github.io/what-the-filter/static/js/2.f4a9fd57.chunk.js.map",
+    "static/js/2.9a0d88d9.chunk.js": "https://renato-bohler.github.io/what-the-filter/static/js/2.9a0d88d9.chunk.js",
+    "static/js/2.9a0d88d9.chunk.js.map": "https://renato-bohler.github.io/what-the-filter/static/js/2.9a0d88d9.chunk.js.map",
     "index.html": "https://renato-bohler.github.io/what-the-filter/index.html",
     "static/css/2.b8fe46b5.chunk.css.map": "https://renato-bohler.github.io/what-the-filter/static/css/2.b8fe46b5.chunk.css.map",
     "static/css/main.a42f11af.chunk.css.map": "https://renato-bohler.github.io/what-the-filter/static/css/main.a42f11af.chunk.css.map",
-    "static/js/2.f4a9fd57.chunk.js.LICENSE.txt": "https://renato-bohler.github.io/what-the-filter/static/js/2.f4a9fd57.chunk.js.LICENSE.txt",
+    "static/js/2.9a0d88d9.chunk.js.LICENSE.txt": "https://renato-bohler.github.io/what-the-filter/static/js/2.9a0d88d9.chunk.js.LICENSE.txt",
     "static/media/check.f9b4f58a.svg": "https://renato-bohler.github.io/what-the-filter/static/media/check.f9b4f58a.svg",
     "static/media/circle.cea12d4e.svg": "https://renato-bohler.github.io/what-the-filter/static/media/circle.cea12d4e.svg",
     "static/media/close.89c27d9a.svg": "https://renato-bohler.github.io/what-the-filter/static/media/close.89c27d9a.svg",
@@ -26,8 +26,8 @@
   "entrypoints": [
     "static/js/runtime-main.da3673ff.js",
     "static/css/2.b8fe46b5.chunk.css",
-    "static/js/2.f4a9fd57.chunk.js",
+    "static/js/2.9a0d88d9.chunk.js",
     "static/css/main.a42f11af.chunk.css",
-    "static/js/main.f24498c3.chunk.js"
+    "static/js/main.c1df0c4d.chunk.js"
   ]
 }
