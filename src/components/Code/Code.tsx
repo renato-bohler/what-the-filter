@@ -25,7 +25,7 @@ import {
   MenuBarButtonContainer,
   Select,
 } from './Code.css';
-import { Example, EXAMPLES } from './examples.const';
+import { CUSTOM_OPTION, Example, EXAMPLES } from './examples.const';
 
 type CodeProps = {
   onSubmit: (value: string, auto?: boolean) => void;
@@ -35,11 +35,15 @@ type CodeProps = {
 
 type EditorInstance = monaco.editor.IStandaloneCodeEditor;
 
+const IS_SHAREABLE_URL = location.hash.startsWith('#code');
+
 export const Code: React.FC<CodeProps> = ({
   onSubmit,
   width,
   submitOnMount,
 }) => {
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const [isCustom, setIsCustom] = useState(false);
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [editorValue, setEditorValue] = useState('');
   const [height, setHeight] = useState<number | undefined>(undefined);
@@ -49,22 +53,8 @@ export const Code: React.FC<CodeProps> = ({
   );
 
   useEffect(() => {
-    if (location.hash.startsWith('#code')) {
-      const compressedCode = location.hash
-        .replace('#code/', '')
-        .trim();
-      const code = decompressFromEncodedURIComponent(compressedCode);
-
-      if (code) {
-        setEditorValue(code);
-        setFullscreen(true);
-      } else {
-        setEditorValue(selectedExample.value);
-        toast('Failed parsing shared URL');
-      }
-    } else {
-      setEditorValue(selectedExample.value);
-    }
+    setEditorValue(selectedExample.value);
+    setIsCustom(false);
   }, [selectedExample]);
 
   const handleHotKey = (event: KeyboardEvent) => {
@@ -89,26 +79,56 @@ export const Code: React.FC<CodeProps> = ({
     onSubmit(option.value, true);
   };
 
+  const initializeEditorValue = () => {
+    if (!IS_SHAREABLE_URL) return;
+
+    const compressedCode = location.hash.replace('#code/', '').trim();
+    const code = decompressFromEncodedURIComponent(compressedCode);
+
+    if (code) {
+      setEditorValue(code);
+      setFullscreen(true);
+      setIsCustom(true);
+      onSubmit(code, true);
+    } else {
+      setEditorValue(selectedExample.value);
+      toast('Failed parsing shared URL');
+    }
+  };
+
   const handleEditorDidMount = (editor: EditorInstance) => {
     setIsEditorReady(true);
-    if (submitOnMount) onSubmit(editor.getValue(), true);
+    initializeEditorValue();
+    if (!IS_SHAREABLE_URL && submitOnMount)
+      onSubmit(editor.getValue(), true);
   };
 
   const handleEditorChange = (value?: string) => {
     setEditorValue(value || '');
+    setIsCustom(true);
   };
 
   const handleSubmit = () => {
     onSubmit(editorValue);
   };
 
+  const handleShare = () => {
+    const input = document.createElement('input');
+    input.value = window.location.href;
+    input.setSelectionRange(0, input.value.length);
+    navigator.clipboard.writeText(input.value);
+
+    setShowCopiedMessage(true);
+    setTimeout(() => setShowCopiedMessage(false), 3000);
+  };
+
   return (
     <Container>
       <Description>Select an example below...</Description>
       <Select<Example, false>
-        value={selectedExample}
+        value={isCustom ? CUSTOM_OPTION.options[0] : selectedExample}
         onChange={handleExampleChange}
-        options={EXAMPLES}
+        options={isCustom ? [...EXAMPLES, CUSTOM_OPTION] : EXAMPLES}
         classNamePrefix="select"
       />
 
@@ -118,6 +138,19 @@ export const Code: React.FC<CodeProps> = ({
         <EditorMenuBar $fullscreen={fullscreen}>
           what the filter?
           <MenuBarButtonContainer>
+            {showCopiedMessage && (
+              <span
+                style={{ fontFamily: 'monospace', marginRight: 16 }}
+              >
+                Copied URL to clipboard!
+              </span>
+            )}
+            <MenuBarButton
+              onClick={handleShare}
+              style={{ background: '#363636' }}
+            >
+              Share
+            </MenuBarButton>
             <MenuBarButton onClick={handleSubmit} title="CTRL + S">
               Execute
             </MenuBarButton>

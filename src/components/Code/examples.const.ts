@@ -5,6 +5,7 @@ import { MAIN_FUNCTION_NAME } from 'src/execute/utils/const';
 export interface Example {
   value: string;
   label: string;
+  isDisabled?: boolean;
 }
 
 const wrap = (label: string, source: string[]): Example => ({
@@ -16,6 +17,11 @@ const wrap = (label: string, source: string[]): Example => ({
     '}',
   ].join('\n'),
 });
+
+export const CUSTOM_OPTION: GroupBase<Example> = {
+  label: 'Custom',
+  options: [{ label: 'Custom', value: '', isDisabled: true }],
+};
 
 export const EXAMPLES: GroupBase<Example>[] = [
   {
