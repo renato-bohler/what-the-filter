@@ -18,9 +18,15 @@ const wrap = (label: string, source: string[]): Example => ({
   ].join('\n'),
 });
 
-export const CUSTOM_OPTION: GroupBase<Example> = {
+export const CUSTOM_OPTION: Example = {
   label: 'Custom',
-  options: [{ label: 'Custom', value: '', isDisabled: true }],
+  value: '',
+  isDisabled: true,
+};
+
+export const CUSTOM_OPTION_GROUP: GroupBase<Example> = {
+  label: 'Custom',
+  options: [CUSTOM_OPTION],
 };
 
 export const EXAMPLES: GroupBase<Example>[] = [

@@ -4,7 +4,12 @@ import { SingleValue } from 'react-select';
 
 import { Container, Description, Select } from './Code.css';
 import { CodeEditor } from './CodeEditor/CodeEditor';
-import { CUSTOM_OPTION, Example, EXAMPLES } from './examples.const';
+import {
+  CUSTOM_OPTION,
+  CUSTOM_OPTION_GROUP,
+  Example,
+  EXAMPLES,
+} from './examples.const';
 
 type CodeProps = {
   onSubmit: (value: string, auto?: boolean) => void;
@@ -24,24 +29,29 @@ export const Code: React.FC<CodeProps> = ({
   );
 
   useEffect(() => {
-    setEditorValue(selectedExample.value);
-    setIsCustom(false);
-  }, [selectedExample]);
+    if (isCustom) {
+      setSelectedExample(CUSTOM_OPTION);
+    } else {
+      setEditorValue(selectedExample.value);
+    }
+  }, [isCustom, selectedExample]);
 
   const handleExampleChange = (selected: SingleValue<Example>) => {
     if (!selected) return;
-    const option = selected as Example;
-    setSelectedExample(option);
-    onSubmit(option.value, true);
+    setIsCustom(false);
+    setSelectedExample(selected);
+    onSubmit(selected.value, true);
   };
 
   return (
     <Container>
       <Description>Select an example below...</Description>
       <Select<Example, false>
-        value={isCustom ? CUSTOM_OPTION.options[0] : selectedExample}
+        value={selectedExample}
         onChange={handleExampleChange}
-        options={isCustom ? [...EXAMPLES, CUSTOM_OPTION] : EXAMPLES}
+        options={
+          isCustom ? [...EXAMPLES, CUSTOM_OPTION_GROUP] : EXAMPLES
+        }
         classNamePrefix="select"
       />
 
