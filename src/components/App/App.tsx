@@ -80,6 +80,7 @@ export const App: React.FC = () => {
 
   const handleCodeSubmit = (code: string, auto = false) => {
     setDiagramNodes([]);
+    setDiagramOpen(true);
 
     setTimeout(async () => {
       try {
@@ -89,7 +90,7 @@ export const App: React.FC = () => {
           throw new Error('Empty result');
 
         setDiagramNodes(generateNodesFromSource(source));
-        setDiagramOpen(true);
+
         if (paneSize === 0) setPaneSize(DEFAULT_PANE_SIZE);
         if (!auto) addCodeToAddress(code);
       } catch (error) {
