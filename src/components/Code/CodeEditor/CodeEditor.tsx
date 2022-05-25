@@ -20,6 +20,7 @@ import {
   MenuBarButton,
   MenuBarButtonContainer,
   MonacoEditor,
+  Text,
 } from './CodeEditor.css';
 
 type CodeEditorProps = {
@@ -118,7 +119,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           >
             X
           </MenuBarButton>
-          what the filter?
+          <Text>what the filter?</Text>
           <MenuBarButtonContainer>
             {showCopiedMessage && (
               <span
@@ -147,7 +148,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
         </IconButton>
 
         <Footer $fullscreen={fullscreen}>
-          <span>
+          <Text>
             Made by{' '}
             <FooterLink
               href="https://renato-bohler.github.io/"
@@ -155,7 +156,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             >
               Renato Böhler
             </FooterLink>
-          </span>
+          </Text>
 
           <GitHubButton
             type="stargazers"

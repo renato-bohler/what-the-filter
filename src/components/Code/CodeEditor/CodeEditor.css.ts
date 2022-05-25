@@ -28,7 +28,17 @@ export const Container = styled.div<WithFullscreen>`
             MENU_BAR_HEIGHT + FOOTER_HEIGHT
           }px) !important`
         : '100%'};
+
+    @media (hover: none) and (pointer: coarse) {
+      min-height: fill-available;
+    }
   }
+`;
+
+export const Text = styled.span`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 export const MenuBar = styled.div<WithFullscreen>`
@@ -48,6 +58,7 @@ export const MenuBar = styled.div<WithFullscreen>`
 
 export const MenuBarButtonContainer = styled.div`
   margin-left: auto;
+  min-width: fit-content;
   height: 100%;
 `;
 
@@ -81,7 +92,7 @@ export const Footer = styled.div<WithFullscreen>`
   align-items: center;
   justify-content: space-between;
 
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   z-index: 3;
