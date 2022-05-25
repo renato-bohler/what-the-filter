@@ -4,6 +4,12 @@ const sandboxContainer = document.getElementById(
   'sandbox-container',
 ) as HTMLElement;
 
+const TIMEOUT_MS = 5000;
+
+/**
+ * Runs a given piece of JS code inside a Web Worker, which is
+ * inside a sandboxed iframe.
+ */
 export const sandbox = async <T>(code: string): Promise<T> => {
   let resolve: (v: T) => void;
   let reject: (e: Error) => void;
@@ -22,10 +28,41 @@ export const sandbox = async <T>(code: string): Promise<T> => {
   }).promise;
 
   sandboxInstance.run(`
+    let worker, timeoutId;
+    const { resolve, reject } = Websandbox.connection.remote;
+    
+    const cleanUp = () => {
+      if (worker) worker.terminate();
+      clearTimeout(timeoutId);
+    };
+    
     try {
-      Websandbox.connection.remote.resolve((() => {${code}})());
+      timeoutId = setTimeout(() => {
+        reject(
+          new Error('Code execution took more than ${TIMEOUT_MS} ms.'),
+        );
+      }, ${TIMEOUT_MS});
+    
+      const blob = new Blob([\`
+          self.postMessage((() => {
+            ${code.replaceAll('`', '\\`').replaceAll('$', '\\$')}
+          })());
+        \`,
+      ]);
+    
+      worker = new Worker(URL.createObjectURL(blob));
+    
+      worker.onmessage = (message) => {
+        resolve(message.data);
+        cleanUp();
+      };
+      worker.onerror = (error) => {
+        reject(new Error(error.message));
+        cleanUp();
+      };
     } catch (error) {
-      Websandbox.connection.remote.reject(error);
+      reject(new Error(error.message));
+      cleanUp();
     }
   `);
 
