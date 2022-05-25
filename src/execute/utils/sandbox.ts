@@ -44,9 +44,14 @@ export const sandbox = async <T>(code: string): Promise<T> => {
       }, ${TIMEOUT_MS});
     
       const blob = new Blob([\`
-          self.postMessage((() => {
+          const result = (function () {
+            const self = {};
             ${code.replaceAll('`', '\\`').replaceAll('$', '\\$')}
-          })());
+          }).call({});
+          const sendMessage = async () => {
+            self.postMessage(await result);
+          };
+          sendMessage();
         \`,
       ]);
     

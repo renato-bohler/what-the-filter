@@ -44,7 +44,7 @@ export const EXAMPLES: GroupBase<Example>[] = [
           ' *',
           ' * The code needs to have a function declared like the following:',
           ' */',
-          'const whatTheFilter = () => {',
+          `const ${MAIN_FUNCTION_NAME} = () => {`,
           '  // You can do anything you want inside the function body',
           '  const input = [1, 2, 3];',
           '  // Whatever you return in this function will be analyzed to generate the diagram',
