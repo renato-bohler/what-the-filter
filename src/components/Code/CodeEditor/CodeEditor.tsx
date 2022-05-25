@@ -110,22 +110,29 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
     <>
       <Container $fullscreen={fullscreen} style={{ width }}>
         <MenuBar $fullscreen={fullscreen}>
+          <MenuBarButton
+            onClick={handleToggleFullscreen}
+            style={{ marginRight: 16 }}
+            title="Close"
+            aria-label="Close"
+          >
+            X
+          </MenuBarButton>
           what the filter?
           <MenuBarButtonContainer>
             {showCopiedMessage && (
               <span
                 style={{ fontFamily: 'monospace', marginRight: 16 }}
               >
-                Copied URL to clipboard!
+                URL copied to clipboard!
               </span>
             )}
+            <MenuBarButton onClick={handleShare}>Share</MenuBarButton>
             <MenuBarButton
-              onClick={handleShare}
-              style={{ background: '#363636' }}
+              onClick={handleSubmit}
+              title="CTRL + S"
+              style={{ background: '#f23333' }}
             >
-              Share
-            </MenuBarButton>
-            <MenuBarButton onClick={handleSubmit} title="CTRL + S">
               Execute
             </MenuBarButton>
           </MenuBarButtonContainer>

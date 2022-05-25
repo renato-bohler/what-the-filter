@@ -44,7 +44,6 @@ export const MenuBar = styled.div<WithFullscreen>`
   height: ${MENU_BAR_HEIGHT}px;
 
   background: black;
-  padding-left: 16px;
 `;
 
 export const MenuBarButtonContainer = styled.div`
@@ -53,7 +52,7 @@ export const MenuBarButtonContainer = styled.div`
 `;
 
 export const MenuBarButton = styled.button`
-  background: #f23333;
+  background: #2e2e2e;
   border: none;
 
   font-family: Sriracha;
