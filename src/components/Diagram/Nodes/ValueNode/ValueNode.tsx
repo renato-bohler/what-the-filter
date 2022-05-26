@@ -98,7 +98,10 @@ export const ValueNode: React.FC<Props> = ({
       {type === 'error' && error ? (
         <ErrorContent error={error} />
       ) : (
-        <ValueDisplay value={value} />
+        <ValueDisplay
+          value={value}
+          collapsed={JSON.stringify(value).length > 100}
+        />
       )}
     </Content>
     <CollapseButton

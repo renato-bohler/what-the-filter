@@ -86,7 +86,8 @@ export const Content = styled.div<ContentProps>`
 
   border-radius: ${({ $open }) => ($open ? '20px' : '50%')};
   padding: ${({ $open }) => ($open ? '20px' : '0')};
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: ${({ $open }) => ($open ? 'auto' : 'hidden')};
 
   transition: 500ms ease-in-out;
 
@@ -103,6 +104,25 @@ export const Content = styled.div<ContentProps>`
 
     & > * {
       white-space: nowrap;
+    }
+
+    & .copy-to-clipboard-container {
+      display: inline !important;
+      opacity: 0;
+    }
+
+    & .object-meta-data:hover {
+      cursor: pointer;
+      .copy-to-clipboard-container {
+        opacity: 1;
+      }
+    }
+
+    & .variable-row:hover {
+      cursor: pointer;
+      .copy-to-clipboard-container {
+        opacity: 1;
+      }
     }
   }
 `;

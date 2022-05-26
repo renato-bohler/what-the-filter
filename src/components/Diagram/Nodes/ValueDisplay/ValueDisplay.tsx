@@ -28,10 +28,10 @@ const ValueType: React.FC<Props> = ({ value, collapsed }) => {
       <ReactJSON
         src={value}
         displayDataTypes={false}
-        enableClipboard={false}
         name={null}
         collapsed={collapsed}
         groupArraysAfterLength={10}
+        collapseStringsAfterLength={50}
       />
     );
   if (typeof value === 'string')

@@ -127,7 +127,6 @@ export const Loading = styled.div`
 
   border-radius: 12px;
   overflow: hidden;
-  /* border: 2px solid white; */
   background: #1e1e1e;
 `;
 
