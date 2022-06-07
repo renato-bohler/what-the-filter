@@ -100,7 +100,7 @@ export const ValueNode: React.FC<Props> = ({
       ) : (
         <ValueDisplay
           value={value}
-          collapsed={JSON.stringify(value).length > 100}
+          collapsed={JSON.stringify(value)?.length > 100}
         />
       )}
     </Content>
